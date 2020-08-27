@@ -6,8 +6,8 @@ public class Lesson_2_4_16 {
 
     public static void main(String[] args) {
 
-        System.out.println(" 8: " + Arrays.toString(evenArray(8)));
-        System.out.println("11: " + Arrays.toString(evenArray(11)));
+        System.out.println(" 8: " + Arrays.toString( evenArray(8) ));
+        System.out.println("11: " + Arrays.toString( evenArray(11) ));
 
     }
 
