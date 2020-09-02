@@ -1,13 +1,12 @@
 package Lesson2;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Lesson_2_4_19_2 {
     public static void main(String[] args) {
-        String text = "Городничий: Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор. (1)\n" +
-                      "Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор. (2)\n" +
+        String text = "Городничий:     Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор. (1)\n" +
+                      "   Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор. (2)\n" +
                       "Я пригласил вас, господа, с тем, чтобы сообщить вам пренеприятное известие: к нам едет ревизор. (3)\n" +
                       "Аммос Федорович: Как ревизор?\n" +
                       "Артемий Филиппович: Как ревизор?\n" +
@@ -23,7 +22,9 @@ public class Lesson_2_4_19_2 {
         String[] textLines = text.split("\n");
         String[] roleLines = roles.split("\n");
 
-        System.out.println( printTextPerRole(roleLines, textLines) );
+        System.out.println( printTextPerRole(roleLines, textLines) ); //Я
+        System.out.println("Антон");
+        System.out.println( prepareOutput(roleLines, textLines) ); //Антон
     }
 
     public static String printTextPerRole(String[] roles, String[] textLines) {
@@ -99,4 +100,36 @@ public class Lesson_2_4_19_2 {
 
     }
 
+    public static String prepareOutput(String[] roles, String[] lines) {
+        Map<String, ArrayList<Map.Entry<Integer, String>>> linesByRole = new HashMap<>();
+        for (String role : roles) {
+            linesByRole.put(role, new ArrayList<>());
+        }
+
+        int index = 1;
+        for (String line : lines) {
+            String[] parts = line.split(":", 2);
+            if (parts.length < 2) {
+                continue;
+            }
+            String role = parts[0];
+            String roleLine = parts[1];
+            if (!linesByRole.containsKey(role)) {
+                continue;
+            }
+            linesByRole.get(role).add(new AbstractMap.SimpleEntry<>(index, roleLine.trim()));
+            index += 1;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (String role : roles) {
+            sb.append(role).append(":").append("\n");
+            for (Map.Entry<Integer, String> line : linesByRole.get(role)) {
+                sb.append(line.getKey()).append(") ").append(line.getValue()).append("\n");
+            }
+            sb.append("\n");
+        }
+
+        return sb.toString();
+    }
 }
