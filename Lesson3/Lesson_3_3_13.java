@@ -4,7 +4,7 @@ public class Lesson_3_3_13 {
     public static void main(String[] args) {
 
         Robot robot = new Robot(15, 300, Direction.UP);
-        moveRobot2(robot, 15, -1000);
+        moveRobot(robot, 25, -10);
 
     }
 
@@ -97,6 +97,7 @@ class Robot {
 
     public void turnRight() {
         // повернуться на 90 градусов по часовой стрелке
+        System.out.println("turn right");
         switch (direction) {
             case UP:
                 direction = Direction.RIGHT;
@@ -143,6 +144,7 @@ class Robot {
 
         x += dx;
         y += dy;
+        System.out.printf("step: x = %d, y = %d, dir = %s\n", x, y, direction);
 
     }
 }
