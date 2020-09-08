@@ -3,8 +3,8 @@ package Lesson3;
 public class Lesson_3_3_13 {
     public static void main(String[] args) {
 
-        Robot robot = new Robot(15, 300, Direction.UP);
-        moveRobot(robot, 25, -10);
+        Robot robot = new Robot(15, 3, Direction.RIGHT);
+        moveRobot3(robot, 15, -3);
 
     }
 
@@ -63,7 +63,73 @@ public class Lesson_3_3_13 {
             robot.stepForward();
             rX = robot.getX();
             rY = robot.getY();
-            System.out.printf("x = %d, y = %d, dir = %s\n ", rX, rY, robot.getDirection());
+        }
+    }
+
+    public static void moveRobot3(Robot robot, int toX, int toY) {
+        Direction toDirectionY = Direction.DOWN;
+        Direction toDirectionX = Direction.RIGHT;
+
+        int rX = robot.getX();
+        int rY = robot.getY();
+
+        while ((rX != toX) || (rY != toY)) {
+            if (toY > rY) {
+                toDirectionY = Direction.UP;
+            } else if (toY < rY) {
+                toDirectionY = Direction.DOWN;
+            }
+            if (toX > rX) {
+                toDirectionX = Direction.RIGHT;
+            } else if (toX < rX) {
+                toDirectionX = Direction.LEFT;
+            }
+
+            if (rX == toX) {
+                if (robot.getDirection() != toDirectionY) {
+                    rotateRobot(robot, toDirectionY);
+                }
+            } else if (rY == toY) {
+                if (robot.getDirection() != toDirectionX) {
+                    rotateRobot(robot, toDirectionX);
+                }
+            } else {
+                if ((robot.getDirection() != toDirectionY)
+                        && (robot.getDirection() != toDirectionX)) {
+                    if ((robot.getDirection() == Direction.DOWN) || (robot.getDirection() == Direction.UP)) {
+                        rotateRobot(robot, toDirectionX);
+                    } else {
+                        rotateRobot(robot, toDirectionY);
+                    }
+                }
+            }
+
+
+            robot.stepForward();
+            rX = robot.getX();
+            rY = robot.getY();
+        }
+    }
+
+
+
+
+
+    private static void rotateRobot(Robot robot, Direction toDir) {
+        Direction rDir = robot.getDirection();
+        if (rDir == toDir) {
+            return;
+        } else if ((((rDir == Direction.UP) || (rDir == Direction.DOWN)) && ((toDir == Direction.UP) || (toDir == Direction.DOWN)))
+                || (((rDir == Direction.RIGHT) || (rDir == Direction.LEFT)) && ((toDir == Direction.RIGHT) || (toDir == Direction.LEFT)))) {
+            robot.turnRight();
+            robot.turnRight();
+        } else if (((rDir == Direction.UP) && (toDir == Direction.RIGHT))
+                || ((rDir == Direction.RIGHT) && (toDir == Direction.DOWN))
+                || ((rDir == Direction.DOWN) && (toDir == Direction.LEFT))
+                || ((rDir == Direction.LEFT) && (toDir == Direction.UP))) {
+            robot.turnRight();
+        } else {
+            robot.turnLeft();
         }
     }
 }
@@ -93,6 +159,21 @@ class Robot {
 
     public void turnLeft() {
         // повернуться на 90 градусов против часовой стрелки
+        System.out.println("turn left");
+        switch (direction) {
+            case UP:
+                direction = Direction.LEFT;
+                break;
+            case RIGHT:
+                direction = Direction.UP;
+                break;
+            case DOWN:
+                direction = Direction.RIGHT;
+                break;
+            case LEFT:
+                direction = Direction.DOWN;
+                break;
+        }
     }
 
     public void turnRight() {
