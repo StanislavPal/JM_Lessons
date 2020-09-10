@@ -72,6 +72,11 @@ public class Lesson_2_4_19_1 {
             //добавляем в буфер
             strBuff.append(replica).append("\n");
         }
+        //Если в буфере что-то осталось, то выгружаем
+        if (strBuff.length() != 0) {
+            //его - в лист реплик
+            replicasList.add(strBuff.toString());
+        }
 
         //Строка<StringBuilder>, в которую всё собираем и строку из которой вернёт метод
         StringBuilder result = new StringBuilder();
