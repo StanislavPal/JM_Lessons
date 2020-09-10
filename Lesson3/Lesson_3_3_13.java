@@ -178,7 +178,7 @@ class Robot {
 
     public void turnRight() {
         // повернуться на 90 градусов по часовой стрелке
-        System.out.println("turn right");
+        System.out.println("turn right".getClass());
         switch (direction) {
             case UP:
                 direction = Direction.RIGHT;
