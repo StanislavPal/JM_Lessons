@@ -5,7 +5,7 @@ public class Main_4_2_9_notPassTest {
 
     }
 
-    public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) {
+    public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) throws Exception {
         int counter = 0;
         boolean bConnect = false;
         while ((counter < 3) & !bConnect) {

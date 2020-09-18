@@ -19,7 +19,6 @@ public class Main {
 }
 
 class Child extends Parent {
-    Map map = HashSet
     Child(){
         protectedValue = 20;
         publicValue = 30;

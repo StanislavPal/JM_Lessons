@@ -5,19 +5,22 @@ public class Main_4_2_9 {
 
     }
 
-    public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) {
+    public static void moveRobot(RobotConnectionManager robotConnectionManager, int toX, int toY) throws Exception {
+        int countOfFalseTry = 3;
         int i;
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < countOfFalseTry; i++) {
             try (RobotConnection robotConnection = robotConnectionManager.getConnection()) {
                 robotConnection.moveRobotTo(toX, toY);
-                break;
+                // переполняем счетчик для выхода из цикла. т.к. break и return нельзя испльзовать
+                // из-за возможного исключения при закрытии ресурса
+                i = countOfFalseTry + 1;
             } catch (RobotConnectionException e) {
-            } catch (Throwable throwable) {
-                throw throwable;
+            } catch (Exception e) {
+                throw e;
             }
         }
-        if (i == 3) {
-            throw new RobotConnectionException("Сделано 3 неудачных попытки соединения!");
+        if (i == countOfFalseTry) {
+            throw new RobotConnectionException("3 unsuccessful connection attempts!");
         }
     }
 }

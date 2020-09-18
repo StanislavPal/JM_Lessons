@@ -6,10 +6,6 @@ public class Robot implements RobotConnection, RobotConnectionManager{
         System.out.printf("Робот переместился в точку (%d, %d)", x, y);
     }
 
-    @Override
-    public void close() {
-        System.out.println("Соединение с роботом закрыто!");
-    }
 
     @Override
     public RobotConnection getConnection() {
@@ -17,4 +13,8 @@ public class Robot implements RobotConnection, RobotConnectionManager{
         return new Robot();
     }
 
+    @Override
+    public void close() throws Exception {
+        System.out.println("Соединение с роботом закрыто!");
+    }
 }
