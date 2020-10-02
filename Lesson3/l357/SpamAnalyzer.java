@@ -1,15 +1,19 @@
 package Lesson3.l357;
 
-import java.util.Arrays;
-
-public class SpamAnalyzer implements TextAnalyzer{
+public class SpamAnalyzer extends AbstractKeywordAnalyzer {
     private String[] keywords;
 
     public SpamAnalyzer (String[] keywords) {
         this.keywords = keywords.clone();
     }
 
-    public Label processText(String text) {
+    @Override
+    protected String[] getKeywords() {
+        return keywords;
+    }
+
+    @Override
+    protected Label getLabel() {
         return Label.SPAM;
     }
 
