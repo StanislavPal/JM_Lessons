@@ -1,4 +1,4 @@
-package Lesson_7;
+package Lesson7;
 
 public interface NumberGenerator<T extends Number> {
     boolean cond(T arg);
